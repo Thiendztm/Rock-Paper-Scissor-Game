@@ -1,0 +1,127 @@
+const express = require('express');
+const app = express();
+const http = require('http');
+const path = require('path');
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
+const rooms = {};
+
+app.use(express.static(path.join(__dirname, 'client')));
+
+app.get('/healthcheck', (req, res) => {
+    res.send('<h1>KEO! BUA! BAO! Game Server is running.</h1>');
+});
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/client/index.html');
+});
+
+io.on('connection', (socket) => {
+    console.log('a user connected');
+    socket.on('disconnect', () => {
+        console.log('a user disconnected');
+    });
+
+    socket.on('createGame', () => {
+        const roomUniqueId = makeid(6);
+        rooms[roomUniqueId] = {};
+        socket.join(roomUniqueId);
+        socket.emit('newGame',{ roomUniqueId: roomUniqueId });
+    });
+
+    socket.on('joinGame', (data) => {
+        if(rooms[data.roomUniqueId] != null) {
+            socket.join(data.roomUniqueId);
+            socket.to(data.roomUniqueId).emit('playersConnected', {});
+            socket.emit("playersConnected");
+        }
+    });
+
+    socket.on('p1Choice', (data) => {
+        let rpsValue = data.rpsValue;
+        rooms[data.roomUniqueId].p1Choice = rpsValue;
+        socket.to(data.roomUniqueId).emit('p1Choice', {rpsValue : data.rpsValue});
+        if(rooms[data.roomUniqueId].p2Choice != null) {
+            declareWinner(data.roomUniqueId);
+        }
+    });
+
+    socket.on("p2Choice", (data) => {
+        let rpsValue = data.rpsValue;
+        rooms[data.roomUniqueId].p2Choice = rpsValue;
+        socket.to(data.roomUniqueId).emit('p2Choice', {rpsValue : data.rpsValue});
+        if(rooms[data.roomUniqueId].p1Choice != null) {
+            declareWinner(data.roomUniqueId);
+        }
+    });
+
+    socket.on('requestRematch', (data) => {
+        const room = rooms[data.roomUniqueId];
+        if (!room) return;
+
+        if (data.isPlayer1) {
+            room.p1Rematch = true;
+        } else {
+            room.p2Rematch = true;
+        }
+
+        socket.to(data.roomUniqueId).emit('rematchRequested', { 
+            player: data.isPlayer1 ? 'p1' : 'p2' 
+        });
+
+        if (room.p1Rematch && room.p2Rematch) {
+            room.p1Choice = null;
+            room.p2Choice = null;
+            room.p1Rematch = false;
+            room.p2Rematch = false;
+            io.sockets.to(data.roomUniqueId).emit('rematchAccepted');
+        }
+    });
+});
+
+function declareWinner(roomUniqueId) {
+    let p1Choice = rooms[roomUniqueId].p1Choice;
+    let p2Choice = rooms[roomUniqueId].p2Choice;
+    let winner = null;
+    if (p1Choice === p2Choice) {
+        winner = "d";
+    } else if (p1Choice == "Bao") {
+        if (p2Choice == "Keo") {
+            winner = "p2";
+        } else {
+            winner = "p1";
+        }
+    } else if (p1Choice == "Bua") {
+        if (p2Choice == "Bao") {
+            winner = "p2";
+        } else {
+            winner = "p1";
+        }
+    } else if (p1Choice == "Keo") {
+        if (p2Choice == "Bua") {
+            winner = "p2";
+        } else {
+            winner = "p1";
+        }
+    }
+    io.sockets.to(roomUniqueId).emit("result", {
+        winner: winner
+    });
+    rooms[roomUniqueId].p1Choice = null;
+    rooms[roomUniqueId].p2Choice = null;
+}
+
+server.listen(5500, () => {
+    console.log('listening on *:5500');
+});
+
+function makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}

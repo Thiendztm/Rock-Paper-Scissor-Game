@@ -1,0 +1,119 @@
+* {
+    font-family: 'montserrat' !important;
+}
+
+body {
+    background-color: #e4dfdf;
+    color: #333;
+    font-weight: 400;
+}
+
+h1 {
+    font-size: 2em;
+    color: #333;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#initial {
+    padding: 8px 14px;
+    border: 2px solid #474343;
+    border-radius: 6px;
+    background: #fff;
+    width: 50%;        
+    min-width: 40%;     
+    max-width: 800px;   
+    margin: 12px auto; 
+    box-sizing: border-box;
+    font-weight: 400;
+}
+
+#initial button {
+  font-weight: 400;
+  cursor: pointer;
+}
+
+#GamePlay {
+
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+#box3, #box4 {
+    border: 2px solid #474343;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fff;                           
+    box-sizing: border-box;    
+    min-height: 150px;  
+    max-height: 150px;   
+    max-width: 20%;    
+}
+
+#gameArea {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;  
+    gap: 12px; 
+}
+
+#player1Choice {
+    padding-top: 10px;
+}
+
+#player2Choice {
+    padding-top: 10px;
+}
+
+#butt1, #butt2, #butt3 {
+    cursor: pointer;
+}
+
+#backButton {
+    text-align: center;
+}
+
+#rematchButton {
+    text-align: center;
+    padding: 8px 14px;
+    border: 2px solid #474343;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: 400;
+}
+
+#rematchButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#backButton {
+    text-align: center;
+    padding: 8px 14px;
+    border: 2px solid #474343;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: 400;
+    margin-left: 8px;
+}
+
+#winnerArea {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+}
+
+#rematchStatus {
+    margin-top: 8px;
+    color: #666;
+    font-size: 0.95rem;
+}

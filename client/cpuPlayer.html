@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KEO BUA BAO - CHOI VOI CPU</title>
+    <link rel="stylesheet" href="./style2.css">
+    <script src="./cpuPlayer.js"></script>
+</head>
+<body>
+    <h1>GAME KEO BUA BAO - CHOI VOI CPU</h1>
+    
+    <div id="gamePlay" style="display: block;">
+        <div id="waitingArea" style="display: none;">
+            
+        </div>
+        <div id="gameArea" style="display: flex;">
+            <div id="box1">
+                Luot cua ban:
+                <div id="player1Choice">
+                    <button onclick="sendChoice('Bua')" id="but1">Bua</button>
+                    <button onclick="sendChoice('Bao')" id="but2">Bao</button>
+                    <button onclick="sendChoice('Keo')" id="but3">Keo</button>
+                </div>
+            </div>
+            <div id="box2">
+                Luot cua CPU:
+                <div id="player2Choice">
+                    <p id="opponentState">CPU san sang!</p>
+                </div>
+            </div>
+        </div>
+        <div id="winnerArea">
+
+        </div>
+    </div>
+</body>
+</html>

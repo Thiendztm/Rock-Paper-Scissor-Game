@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KEO BUA BAO</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./client.js"></script>
+</head>
+<body>
+    <h1>GAME KEO BUA BAO</h1>
+    <div id="initial">
+        <pre></pre>
+        <button onclick="startCpuGame()" id="choiVoiMay">Choi voi may</button>
+        <pre></pre>
+        <button onclick="createGame()" id="taoPhong">Tao Phong</button>
+        <pre></pre>
+        <input type="text" name="" id="roomUniqueId" />
+        <button onclick="joinGame()" id="thamGia">Tham Gia</button>
+    </div>
+    <div id="gamePlay">
+        <div id="waitingArea">
+            
+        </div>
+        <div id="gameArea" style="display: none;">
+            <div id="box3">
+                Luot cua ban:
+                <div id="player1Choice">
+                    <button onclick="sendChoice('Bua')" id="butt1">Bua</button>
+                    <button onclick="sendChoice('Bao')" id="butt2">Bao</button>
+                    <button onclick="sendChoice('Keo')" id="butt3">Keo</button>
+                </div>
+            </div>
+            <div id="box4">
+                Luot cua doi thu:
+                <div id="player2Choice">
+                </div>
+            </div>
+        </div>
+        <div id="winnerArea">
+
+        </div>
+    </div>
+</body>
+</html>

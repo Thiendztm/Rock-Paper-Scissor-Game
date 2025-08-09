@@ -1,0 +1,129 @@
+* {
+    font-family: 'montserrat' !important;
+}
+
+body {
+    background-color: #e4dfdf;
+    color: #333;
+    font-weight: 400;
+}
+
+h1 {
+    font-size: 2em;
+    color: #333;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+
+#GamePlay {
+
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+#box1, #box2 {
+    border: 2px solid #474343;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #fff;                           
+    box-sizing: border-box;    
+    min-height: 100px;  
+    max-height: 100px;  
+    max-width: 20%;    
+}
+
+#gameArea {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;  
+    gap: 12px; 
+}
+
+#player1Choice {
+    padding-top: 10px;
+}
+
+#player2Choice {
+    padding-top: 10px;
+}
+
+#but1, #but2, #but3 {
+    cursor: pointer;
+}
+
+#backButton {
+    text-align: center;
+}
+
+#rematchButton {
+    text-align: center;
+    padding: 8px 14px;
+    border: 2px solid #474343;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#rematchButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#winnerArea {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+}
+
+#rematchStatus {
+    margin-top: 8px;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+#scoreText {
+    margin: 10px;
+}
+
+#actions {
+  display: flex;
+  justify-content: center; 
+  align-items: center;            
+  margin: 10px;
+}
+.action-rematch-button, .action-back-button {
+  display: inline-flex;   
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.action-back-button {
+    margin-top: 13px;
+    
+}
+
+#rematchButton {
+    text-align: center;
+    padding: 8px 14px;
+    border: 2px solid #474343;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+}
+
+#backButton {
+    text-align: center;
+    padding: 8px 14px;
+    border: 2px solid #474343;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+}
