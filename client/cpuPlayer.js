@@ -8,7 +8,16 @@ let gameState = {
     cpuScore: 0
 };
 
-const choices = ['Keo', 'Bua', 'Bao'];
+const choices = ['Bua', 'Bao', 'Keo'];
+
+function getChoiceIcon(choice) {
+    const iconMap = {
+        'Bua': 'fist.jpg',
+        'Bao': 'paper.jpg', 
+        'Keo': 'scissor.jpg'
+    };
+    return iconMap[choice] || choice;
+}
 
 function getCpuChoice() {
     return choices[Math.floor(Math.random() * choices.length)];
@@ -22,7 +31,14 @@ function sendChoice(rpsValue) {
     
     let playerChoiceButton = document.createElement('button');
     playerChoiceButton.classList.add(rpsValue.toString().toLowerCase());
-    playerChoiceButton.innerText = rpsValue;
+    playerChoiceButton.classList.add('choice-button');
+    
+    const img = document.createElement('img');
+    img.src = getChoiceIcon(rpsValue);
+    img.alt = rpsValue;
+    img.className = 'icon';
+    playerChoiceButton.appendChild(img);
+    
     document.getElementById('player1Choice').innerHTML = "";
     document.getElementById('player1Choice').appendChild(playerChoiceButton);
 
@@ -50,7 +66,13 @@ function createCpuChoiceButton(cpuChoice) {
     let cpuButton = document.createElement('button');
     cpuButton.id = 'opponentButton';
     cpuButton.classList.add(cpuChoice.toString().toLowerCase());
-    cpuButton.innerText = cpuChoice;
+    cpuButton.classList.add('choice-button');
+    
+    const img = document.createElement('img');
+    img.src = getChoiceIcon(cpuChoice);
+    img.alt = cpuChoice;
+    img.className = 'icon';
+    cpuButton.appendChild(img);
     
     const player2Choice = document.getElementById('player2Choice');
     player2Choice.innerHTML = '';
@@ -72,11 +94,11 @@ function calculateResult() {
 
 function determineWinner(playerChoice, cpuChoice) {
     if (playerChoice === cpuChoice) {
-        return 'd'; // draw
+        return 'd';
     }
     
     const winConditions = {
-        'Keo': 'Bao',    // p1 wins if p1 choice beats cpu choice
+        'Keo': 'Bao',   
         'Bua': 'Keo',
         'Bao': 'Bua'
     };
@@ -104,6 +126,7 @@ function displayResult(result) {
     winnerArea.style.textAlign = 'center';
     winnerArea.style.padding = '8px 14px';
     winnerArea.style.margin = '10px';
+    winnerArea.className = 'glow';
 
     winnerArea.innerHTML = '';
     const winnerTextEl = document.createElement('div');
@@ -112,6 +135,7 @@ function displayResult(result) {
 
     const scoreEl = document.createElement('div');
     scoreEl.id = 'scoreText';
+    scoreEl.className = 'glow';
     scoreEl.textContent = `Diem so: Ban ${gameState.playerScore} - ${gameState.cpuScore} CPU`;
 
     winnerArea.appendChild(winnerTextEl);
@@ -156,13 +180,13 @@ function showRematchButton() {
 
 function resetGameUI() {
     document.getElementById('player1Choice').innerHTML = `
-        <button onclick="sendChoice('Bua')">Bua</button>
-        <button onclick="sendChoice('Bao')">Bao</button>
-        <button onclick="sendChoice('Keo')">Keo</button>
+        <button onclick="sendChoice('Bua')" id="but1"><img src="fist.jpg" alt="" class="icon"></button>
+        <button onclick="sendChoice('Bao')" id="but2"><img src="paper.jpg" alt="" class="icon"></button>
+        <button onclick="sendChoice('Keo')" id="but3"><img src="scissor.jpg" alt="" class="icon"></button>
     `;
     
     document.getElementById('player2Choice').innerHTML = `
-        <p id="opponentState">CPU san sang!</p> 
+        <p id="opponentState" style="color: white;">CPU san sang!</p> 
     `;
 
     const winnerArea = document.getElementById('winnerArea');

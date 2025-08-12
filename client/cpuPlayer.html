@@ -8,7 +8,7 @@
     <script src="./cpuPlayer.js"></script>
 </head>
 <body>
-    <h1>GAME KEO BUA BAO - CHOI VOI CPU</h1>
+    <h1 class="glow">GAME KEO BUA BAO - CHOI VOI CPU</h1>
     
     <div id="gamePlay" style="display: block;">
         <div id="waitingArea" style="display: none;">
@@ -16,17 +16,17 @@
         </div>
         <div id="gameArea" style="display: flex;">
             <div id="box1">
-                Luot cua ban:
+                <span>Luot cua ban:</span>
                 <div id="player1Choice">
-                    <button onclick="sendChoice('Bua')" id="but1">Bua</button>
-                    <button onclick="sendChoice('Bao')" id="but2">Bao</button>
-                    <button onclick="sendChoice('Keo')" id="but3">Keo</button>
+                    <button onclick="sendChoice('Bua')" id="but1"><img src="fist.jpg" alt="" class="icon"></button>
+                    <button onclick="sendChoice('Bao')" id="but2"><img src="paper.jpg" alt="" class="icon"></button>
+                    <button onclick="sendChoice('Keo')" id="but3"><img src="scissor.jpg" alt="" class="icon"></button>
                 </div>
             </div>
             <div id="box2">
-                Luot cua CPU:
+                <span>Luot cua CPU:</span>
                 <div id="player2Choice">
-                    <p id="opponentState">CPU san sang!</p>
+                    <p id="opponentState" style="color: white;">CPU san sang!</p>
                 </div>
             </div>
         </div>
