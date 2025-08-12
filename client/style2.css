@@ -3,7 +3,8 @@
 }
 
 body {
-    background-color: #e4dfdf;
+    background: url('bgcpu.jpg') no-repeat center;
+    background-size: cover;
     color: #333;
     font-weight: 400;
 }
